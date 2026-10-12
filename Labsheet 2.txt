@@ -1,0 +1,1869 @@
+Sure! I'll provide all 25 Flutter programs with complete Dart code and output descriptions here in the chat, not in PDF format, following your BCA303P Lab Sheet 2.
+For each program, you'll get:
+Aim
+Program code
+Output (what appears on the screen)
+Result
+Each program is independent. Copy its code into lib/main.dart in your Flutter project and run it.
+BCA303P – LAB SHEET 2
+Basic Flutter Widgets and User Interface Design
+Program 1: Display "Hello Flutter"
+Aim
+To create a Flutter application that displays a "Hello Flutter" message on the screen.
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text(
+            'Hello Flutter',
+            style: TextStyle(fontSize: 28),
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays:
++---------------------------+
+|                           |
+|                           |
+|       Hello Flutter       |
+|                           |
+|                           |
++---------------------------+
+The text appears in the center of the screen.
+Result
+The Flutter application successfully displays the "Hello Flutter" message.
+Program 2: Display Student Information
+Aim
+To display the student's name, course, semester, and college name using Text widgets.
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Student Information'),
+        ),
+        body: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Name: Rahul Sharma'),
+              Text('Course: BCA'),
+              Text('Semester: 3rd'),
+              Text('College: ABC College'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
++---------------------------+
+| Student Information       |
++---------------------------+
+|                           |
+| Name: Rahul Sharma        |
+| Course: BCA               |
+| Semester: 3rd             |
+| College: ABC College      |
+|                           |
++---------------------------+
+Note: Replace the sample name and college with your own details.
+Result
+The application successfully displays student information using Text widgets.
+Program 3: Demonstrate Different Text Styles
+Aim
+To demonstrate bold, italic, different font sizes, and text alignment in Flutter.
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Text Styles'),
+        ),
+        body: const Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Bold Text',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Italic Text',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+              Text(
+                'Small Text',
+                style: TextStyle(fontSize: 14),
+              ),
+              Text(
+                'Large Text',
+                style: TextStyle(fontSize: 30),
+              ),
+              Text(
+                'Centered Text',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 22),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays:
+Bold Text in bold letters.
+Italic Text in italic letters.
+Small Text in a small font.
+Large Text in a large font.
+Centered Text aligned in the center.
+Result
+The application successfully demonstrates different text styles and alignment options.
+Program 4: Display an Image Using the Image Widget
+Aim
+To display an image using the Image widget in Flutter.
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Display Image'),
+        ),
+        body: Center(
+          child: Image.network(
+            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+            width: 250,
+            height: 250,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return const Text('Unable to load image');
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays an owl image in the center.
+Note: An internet connection is required to load the image.
+Result
+The application successfully demonstrates displaying an image using the Image widget.
+Program 5: Display Different Icons
+Aim
+To display different icons using the Icon widget.
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Flutter Icons'),
+        ),
+        body: const Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Icon(Icons.home, size: 50),
+              Icon(Icons.favorite, size: 50),
+              Icon(Icons.person, size: 50),
+              Icon(Icons.settings, size: 50),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays four icons horizontally:
+   🏠       ♥       👤       ⚙
+  Home   Favorite  Person  Settings
+The actual icons are rendered using Flutter's Material icons.
+Result
+The application successfully displays different icons using the Icon widget.
+Program 6: Display Text, Image, and Icon Together
+Aim
+To create an application containing Text, Image, and Icon widgets on the same screen.
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Multiple Widgets'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Welcome to Flutter',
+                style: TextStyle(fontSize: 24),
+              ),
+              const SizedBox(height: 20),
+              Image.network(
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                width: 150,
+                height: 150,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(Icons.image_not_supported, size: 100);
+                },
+              ),
+              const SizedBox(height: 20),
+              const Icon(
+                Icons.favorite,
+                size: 50,
+                color: Colors.red,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays:
+The text "Welcome to Flutter".
+An owl image below the text.
+A red heart icon below the image.
+Result
+The application successfully combines Text, Image, and Icon widgets on a single screen.
+Program 7: Demonstrate the Container Widget
+Aim
+To demonstrate the Container widget with customized height, width, padding, margin, and decoration.
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Container Widget'),
+        ),
+        body: Center(
+          child: Container(
+            height: 200,
+            width: 250,
+            margin: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: Colors.black,
+                width: 2,
+              ),
+            ),
+            child: const Center(
+              child: Text(
+                'Hello Container',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+A blue rectangular box with rounded corners appears in the center of the screen. It contains the white text "Hello Container".
+Result
+The application successfully demonstrates the Container widget and its properties.
+Program 8: Display Text Horizontally Using Row
+Aim
+To display multiple Text widgets horizontally using the Row widget.
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Row Widget'),
+        ),
+        body: const Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text('Apple', style: TextStyle(fontSize: 20)),
+              Text('Banana', style: TextStyle(fontSize: 20)),
+              Text('Mango', style: TextStyle(fontSize: 20)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays three texts horizontally:
+    Apple       Banana       Mango
+Result.
+Below are the complete solutions for all 25 questions of BCA303P – Lab Sheet 2: Basic Flutter Widgets and User Interface Design, based on your uploaded lab sheet. BCA303P-AS02.pdf
+Each solution includes:
+Question
+Aim
+Flutter/Dart program code
+Output
+Result
+How to run the programs: Create a Flutter project, open lib/main.dart, paste the code for one program at a time, and run flutter run. Each program is independent.
+PROGRAM 1: Display "Hello Flutter"
+Question
+Create a Flutter application to display a "Hello Flutter" message on the screen.
+Aim
+To create a Flutter application that displays a text message using the Text widget.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      body: Center(
+        child: Text(
+          'Hello Flutter',
+          style: TextStyle(fontSize: 28),
+        ),
+      ),
+    ),
+  ));
+}
+Output
++-------------------------+
+|                         |
+|                         |
+|      Hello Flutter      |
+|                         |
+|                         |
++-------------------------+
+The message appears in the center of the screen.
+Result
+The application successfully displays "Hello Flutter" using the Text widget.
+PROGRAM 2: Display Student Information
+Question
+Create a Flutter application to display your name, course, semester, and college name using Text widgets.
+Aim
+To display student information using multiple Text widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: StudentApp(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class StudentApp extends StatelessWidget {
+  const StudentApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Student Details')),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Name: Rahul Sharma'),
+            Text('Course: BCA'),
+            Text('Semester: 3rd'),
+            Text('College: ABC College'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
++---------------------------+
+| Student Details           |
++---------------------------+
+|                           |
+| Name: Rahul Sharma        |
+| Course: BCA               |
+| Semester: 3rd             |
+| College: ABC College      |
+|                           |
++---------------------------+
+Note: Replace the example name, semester, and college with your own details.
+Result
+The application successfully displays student information using Text widgets.
+PROGRAM 3: Demonstrate Different Text Styles
+Question
+Create a Flutter application to demonstrate bold, italic, different font sizes, and text alignment.
+Aim
+To demonstrate various text styles using the TextStyle property.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Text Styles')),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            Text(
+              'Bold Text',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            ),
+            Text(
+              'Italic Text',
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                fontSize: 20,
+              ),
+            ),
+            Text(
+              'Small Text',
+              style: TextStyle(fontSize: 14),
+            ),
+            Text(
+              'Large Text',
+              style: TextStyle(fontSize: 30),
+            ),
+            Text(
+              'Centered Text',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 22),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ));
+}
+Output
+The screen displays:
+Bold Text in bold letters.
+Italic Text in italic letters.
+Small Text in a small font.
+Large Text in a large font.
+Centered Text with center alignment.
+Result
+The application successfully demonstrates different text styles and text alignment.
+PROGRAM 4: Display an Image Using the Image Widget
+Question
+Create a Flutter application to display an image using the Image widget.
+Aim
+To display an image in a Flutter application.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Image Widget')),
+      body: Center(
+        child: Image(
+          image: NetworkImage(
+            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+          ),
+          width: 250,
+          height: 250,
+          fit: BoxFit.cover,
+        ),
+      ),
+    ),
+  ));
+}
+Output
+The application displays an owl image in the center of the screen.
+Note: An internet connection is required to load this image.
+Result
+The application successfully displays an image using the Image widget.
+PROGRAM 5: Display Different Icons
+Question
+Create a Flutter application to display different icons using the Icon widget.
+Aim
+To demonstrate the use of different icons in Flutter.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Different Icons')),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(Icons.home, size: 45, color: Colors.blue),
+            Icon(Icons.favorite, size: 45, color: Colors.red),
+            Icon(Icons.person, size: 45, color: Colors.green),
+            Icon(Icons.settings, size: 45, color: Colors.orange),
+          ],
+        ),
+      ),
+    ),
+  ));
+}
+Output
+Four icons appear horizontally:
+    Home     Favorite     Person     Settings
+
+     🏠          ♥           👤          ⚙
+The actual output uses Flutter's Material icons.
+Result
+The application successfully displays different icons using the Icon widget.
+PROGRAM 6: Display Text, Image, and Icon Together
+Question
+Create a Flutter application containing Text, Image, and Icon widgets on the same screen.
+Aim
+To combine Text, Image, and Icon widgets in one application.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Multiple Widgets')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Welcome to Flutter',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 15),
+            Image(
+              image: NetworkImage(
+                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+              ),
+              width: 150,
+              height: 150,
+            ),
+            SizedBox(height: 15),
+            Icon(
+              Icons.favorite,
+              size: 45,
+              color: Colors.red,
+            ),
+          ],
+        ),
+      ),
+    ),
+  ));
+}
+Output
+The screen displays:
+"Welcome to Flutter" at the top.
+An owl image in the middle.
+A red heart icon at the bottom.
+Result
+The application successfully combines Text, Image, and Icon widgets.
+PROGRAM 7: Demonstrate the Container Widget
+Question
+Create a Flutter application using the Container widget and customize its height, width, padding, margin, and decoration.
+Aim
+To demonstrate the properties of the Container widget.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Container Widget')),
+      body: Center(
+        child: Container(
+          height: 200,
+          width: 250,
+          margin: EdgeInsets.all(20),
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: Colors.black, width: 2),
+          ),
+          child: const Center(
+            child: Text(
+              'Hello Container',
+              style: TextStyle(
+                fontSize: 22,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ));
+}
+Output
+A blue rectangular container with rounded corners appears in the center. The white text "Hello Container" appears inside it.
+Result
+The application successfully demonstrates height, width, padding, margin, and decoration using the Container widget.
+PROGRAM 8: Display Text Horizontally Using Row
+Question
+Create a Flutter application to display multiple Text widgets horizontally using the Row widget.
+Aim
+To arrange multiple Text widgets horizontally.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Row Widget')),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text('Apple', style: TextStyle(fontSize: 20)),
+            Text('Banana', style: TextStyle(fontSize: 20)),
+            Text('Mango', style: TextStyle(fontSize: 20)),
+          ],
+        ),
+      ),
+    ),
+  ));
+}
+Output
++---------------------------+
+| Row Widget                |
++---------------------------+
+|                           |
+| Apple   Banana    Mango   |
+|                           |
++---------------------------+
+Result
+The application successfully displays multiple Text widgets horizontally using Row.
+PROGRAM 9: Display Text Vertically Using Column
+Question
+Create a Flutter application to display multiple Text widgets vertically using the Column widget.
+Aim
+To arrange multiple Text widgets vertically.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Column Widget')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('First', style: TextStyle(fontSize: 22)),
+            SizedBox(height: 10),
+            Text('Second', style: TextStyle(fontSize: 22)),
+            SizedBox(height: 10),
+            Text('Third', style: TextStyle(fontSize: 22)),
+          ],
+        ),
+      ),
+    ),
+  ));
+}
+Output
++---------------------------+
+| Column Widget             |
++---------------------------+
+|                           |
+|          First            |
+|          Second           |
+|          Third            |
+|                           |
++---------------------------+
+Result
+The application successfully displays multiple Text widgets vertically using Column.
+PROGRAM 10: Create Submit, Reset, and Cancel Buttons
+Question
+Create a Flutter application containing three buttons: Submit, Reset, and Cancel.
+Aim
+To demonstrate button widgets in Flutter.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: ButtonApp(),
+  ));
+}
+
+class ButtonApp extends StatelessWidget {
+  const ButtonApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Button Example')),
+      body: Center(
+        child: Wrap(
+          spacing: 10,
+          children: [
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Submit'),
+            ),
+            OutlinedButton(
+              onPressed: () {},
+              child: const Text('Reset'),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text('Cancel'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+Three buttons appear on the screen:
++----------------------------------+
+| Button Example                   |
++----------------------------------+
+|                                  |
+|  [Submit]  [Reset]  Cancel       |
+|                                  |
++----------------------------------+
+Result
+The application successfully displays Submit, Reset, and Cancel buttons.
+PROGRAM 11: Design a Student Profile Card
+Question
+Create a Flutter application to design a simple student profile card using Container, Text, Image, and Icon widgets.
+Aim
+To design a student profile card using basic Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: ProfileApp(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class ProfileApp extends StatelessWidget {
+  const ProfileApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Student Profile')),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.blue.shade50,
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.blue),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircleAvatar(
+                radius: 45,
+                child: Icon(Icons.person, size: 55),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Rahul Sharma',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const Text('BCA Student'),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.school),
+                  SizedBox(width: 5),
+                  Text('Semester 3'),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+A student profile card appears containing:
+A profile icon.
+Student name: Rahul Sharma.
+Course: BCA Student.
+A school icon and semester information.
+Result
+The application successfully displays a student profile card using Flutter widgets.
+PROGRAM 12: Design a Business Card
+Question
+Create a Flutter application to design a business card containing name, phone number, email, and profile image.
+Aim
+To create a digital business card using Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: BusinessCardApp(),
+  ));
+}
+
+class BusinessCardApp extends StatelessWidget {
+  const BusinessCardApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Business Card')),
+      body: Center(
+        child: Card(
+          elevation: 5,
+          margin: const EdgeInsets.all(20),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircleAvatar(
+                  radius: 45,
+                  child: Icon(Icons.person, size: 50),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Rahul Sharma',
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text('Flutter Developer'),
+                const Divider(),
+                const ListTile(
+                  leading: Icon(Icons.phone),
+                  title: Text('9876543210'),
+                ),
+                const ListTile(
+                  leading: Icon(Icons.email),
+                  title: Text('rahul@example.com'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+A business card appears with a profile icon, name, job title, phone number, and email address.
+Result
+The application successfully creates a business card using Flutter widgets.
+PROGRAM 13: Design a Login Screen
+Question
+Create a Flutter application to design a simple login screen using Text, TextField, Button, and Image widgets.
+Aim
+To design a basic login interface in Flutter.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: LoginApp(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class LoginApp extends StatelessWidget {
+  const LoginApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Login Screen')),
+      body: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(Icons.account_circle, size: 90),
+            const Text(
+              'Welcome Back!',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Username',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.person),
+              ),
+            ),
+            const SizedBox(height: 15),
+            const TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.lock),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Login'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+The login screen displays:
+A profile icon.
+"Welcome Back!" heading.
+Username field.
+Password field.
+Login button.
+Result
+The application successfully creates a basic login screen using TextField and button widgets.
+PROGRAM 14: Design a Registration Screen
+Question
+Create a Flutter application to design a registration screen containing name, email, password, and a registration button.
+Aim
+To create a simple registration form using Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: RegistrationApp(),
+  ));
+}
+
+class RegistrationApp extends StatelessWidget {
+  const RegistrationApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Registration')),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          children: [
+            const Icon(Icons.app_registration, size: 80),
+            const Text(
+              'Create Account',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Full Name',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 15),
+            const TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 15),
+            const TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Register'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays a registration heading, Full Name field, Email field, Password field, and Register button.
+Result
+The application successfully creates a registration form.
+PROGRAM 15: Design a College Home Screen
+Question
+Create a Flutter application to design a simple college home screen containing college name, logo, and menu options.
+Aim
+To design a basic college home screen using Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: CollegeApp(),
+  ));
+}
+
+class CollegeApp extends StatelessWidget {
+  const CollegeApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('College Home')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.school,
+              size: 100,
+              color: Colors.blue,
+            ),
+            const Text(
+              'ABC College',
+              style: TextStyle(
+                fontSize: 27,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 25),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('About Us'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Courses'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Admissions'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Contact Us'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays a college logo icon, college name, and four menu buttons: About Us, Courses, Admissions, and Contact Us.
+Result
+The application successfully creates a simple college home screen.
+PROGRAM 16: Display Multiple Products Using Container and Card
+Question
+Create a Flutter application to display multiple products using Container and Card widgets.
+Aim
+To display product information using Card and Container widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: ProductApp(),
+  ));
+}
+
+class ProductApp extends StatelessWidget {
+  const ProductApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Products')),
+      body: ListView(
+        children: [
+          productCard('Laptop', '₹45,000', Icons.laptop),
+          productCard('Mobile Phone', '₹15,000', Icons.phone_android),
+          productCard('Headphones', '₹2,000', Icons.headphones),
+        ],
+      ),
+    );
+  }
+
+  Widget productCard(String name, String price, IconData icon) {
+    return Card(
+      margin: const EdgeInsets.all(12),
+      child: Container(
+        padding: const EdgeInsets.all(18),
+        child: Row(
+          children: [
+            Icon(icon, size: 50, color: Colors.blue),
+            const SizedBox(width: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(price),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+Three product cards appear:
++---------------------------+
+| Products                  |
++---------------------------+
+| 💻  Laptop                |
+|     ₹45,000               |
++---------------------------+
+| 📱  Mobile Phone          |
+|     ₹15,000               |
++---------------------------+
+| 🎧  Headphones            |
+|     ₹2,000                |
++---------------------------+
+Result
+The application successfully displays multiple products using Card and Container widgets.
+PROGRAM 17: Display Student Information Using Card
+Question
+Create a Flutter application using the Card widget to display student information such as name, roll number, course, and semester.
+Aim
+To display student details inside a Card widget.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: StudentCardApp(),
+  ));
+}
+
+class StudentCardApp extends StatelessWidget {
+  const StudentCardApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Student Information')),
+      body: Center(
+        child: Card(
+          elevation: 6,
+          margin: const EdgeInsets.all(20),
+          child: const Padding(
+            padding: EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.account_circle, size: 70),
+                Text(
+                  'Rahul Sharma',
+                  style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text('Roll Number: 101'),
+                Text('Course: BCA'),
+                Text('Semester: 3rd'),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+A card displays the student's profile icon, name, roll number, course, and semester.
+Result
+The application successfully displays student information using the Card widget.
+PROGRAM 18: Demonstrate Padding and Margin
+Question
+Create a Flutter application to demonstrate the use of Padding and Margin for arranging UI elements properly.
+Aim
+To demonstrate spacing around and inside widgets using Padding and margin.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Padding and Margin')),
+      body: Center(
+        child: Container(
+          margin: const EdgeInsets.all(30),
+          color: Colors.orange.shade100,
+          child: Padding(
+            padding: const EdgeInsets.all(30),
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              color: Colors.blue,
+              child: const Text(
+                'Hello Flutter',
+                style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ));
+}
+Output
+An orange-colored outer area surrounds a blue inner box. The text "Hello Flutter" appears inside the blue box with spacing around it.
+Margin creates space outside a widget.
+Padding creates space inside a widget around its child.
+Result
+The application successfully demonstrates the use of padding and margin.
+PROGRAM 19: Demonstrate Center and Align Widgets
+Question
+Create a Flutter application to demonstrate different alignment options using Center and Align widgets.
+Aim
+To position widgets using Center and Align.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Alignment Example')),
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text('Top Left'),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Text('Top Right'),
+            ),
+            Center(
+              child: Text(
+                'Center',
+                style: TextStyle(fontSize: 24),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Text('Bottom Left'),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text('Bottom Right'),
+            ),
+          ],
+        ),
+      ),
+    ),
+  ));
+}
+Output
++---------------------------+
+| Top Left       Top Right  |
+|                           |
+|                           |
+|          Center           |
+|                           |
+|                           |
+| Bottom Left   Bottom Right|
++---------------------------+
+Result
+The application successfully demonstrates different alignment positions using Center and Align widgets.
+PROGRAM 20: Design a Food Menu Screen
+Question
+Create a Flutter application to design a simple food menu screen using images, text, icons, and buttons.
+Aim
+To design a food menu interface using Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: FoodMenuApp(),
+  ));
+}
+
+class FoodMenuApp extends StatelessWidget {
+  const FoodMenuApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Food Menu')),
+      body: ListView(
+        children: [
+          foodCard('Pizza', '₹199', Icons.local_pizza),
+          foodCard('Burger', '₹99', Icons.lunch_dining),
+          foodCard('Ice Cream', '₹79', Icons.icecream),
+        ],
+      ),
+    );
+  }
+
+  Widget foodCard(String name, String price, IconData icon) {
+    return Card(
+      margin: const EdgeInsets.all(12),
+      child: ListTile(
+        leading: Icon(icon, size: 45, color: Colors.orange),
+        title: Text(name),
+        subtitle: Text(price),
+        trailing: ElevatedButton(
+          onPressed: () {},
+          child: const Text('Order'),
+        ),
+      ),
+    );
+  }
+}
+Output
+The screen displays three food items:
+Pizza — ₹199 — Order button.
+Burger — ₹99 — Order button.
+Ice Cream — ₹79 — Order button.
+Each item includes a food icon, name, price, and button.
+Result
+The application successfully creates a simple food menu screen using icons, text, cards, and buttons.
+PROGRAM 21: Design a Simple Calculator Interface
+Question
+Create a Flutter application to design a simple calculator interface using buttons and basic layout widgets.
+Aim
+To design a calculator interface using Row, Column, and button widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: CalculatorApp(),
+  ));
+}
+
+class CalculatorApp extends StatelessWidget {
+  const CalculatorApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Calculator')),
+      body: Column(
+        children: [
+          Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.all(25),
+            width: double.infinity,
+            child: const Text(
+              '0',
+              style: TextStyle(fontSize: 40),
+            ),
+          ),
+          ...[
+            ['7', '8', '9', '/'],
+            ['4', '5', '6', '*'],
+            ['1', '2', '3', '-'],
+            ['C', '0', '=', '+'],
+          ].map(
+            (row) => Expanded(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: row.map((label) {
+                  return Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text(
+                          label,
+                          style: const TextStyle(fontSize: 22),
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+Output
+A calculator interface appears with a display area and buttons arranged in rows:
++-----------------------+
+| Calculator            |
++-----------------------+
+|                     0 |
++-----------------------+
+|   7   |   8   |  9 | /|
+|   4   |   5   |  6 | *|
+|   1   |   2   |  3 | -|
+|   C   |   0   |  = | +|
++-----------------------+
+Note: This program creates the calculator interface only. The buttons do not yet perform calculations.
+Result
+The application successfully designs a calculator interface using basic layout and button widgets.
+PROGRAM 22: Design a Weather Information Screen
+Question
+Create a Flutter application to design a weather information screen containing location, temperature, weather icon, and other information.
+Aim
+To display weather-related information using Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: WeatherApp(),
+  ));
+}
+
+class WeatherApp extends StatelessWidget {
+  const WeatherApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Weather')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Dehradun, India',
+              style: TextStyle(fontSize: 25),
+            ),
+            const Icon(
+              Icons.wb_sunny,
+              size: 100,
+              color: Colors.orange,
+            ),
+            const Text(
+              '28°C',
+              style: TextStyle(
+                fontSize: 45,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              'Sunny',
+              style: TextStyle(fontSize: 22),
+            ),
+            const SizedBox(height: 20),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Icon(Icons.water_drop),
+                    Text('Humidity'),
+                    Text('60%'),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Icon(Icons.air),
+                    Text('Wind Speed'),
+                    Text('12 km/h'),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+The weather screen displays:
+Location: Dehradun, India.
+Weather icon: Sun.
+Temperature: 28°C.
+Condition: Sunny.
+Humidity: 60%.
+Wind speed: 12 km/h.
+Note: These are sample values, not live weather data.
+Result
+The application successfully creates a weather information screen using Text, Icon, Row, and Column widgets.
+PROGRAM 23: Design a Shopping Product Screen
+Question
+Create a Flutter application to design a simple shopping product screen using Image, Text, Icon, Card, and Button widgets.
+Aim
+To design a shopping product page using Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: ShoppingApp(),
+  ));
+}
+
+class ShoppingApp extends StatelessWidget {
+  const ShoppingApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Shopping Product')),
+      body: Center(
+        child: Card(
+          margin: const EdgeInsets.all(20),
+          elevation: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.headphones,
+                  size: 120,
+                  color: Colors.blue,
+                ),
+                const Text(
+                  'Wireless Headphones',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Text(
+                  'Price: ₹1,999',
+                  style: TextStyle(fontSize: 18),
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.star, color: Colors.orange),
+                    Icon(Icons.star, color: Colors.orange),
+                    Icon(Icons.star, color: Colors.orange),
+                    Icon(Icons.star, color: Colors.orange),
+                    Icon(Icons.star_half, color: Colors.orange),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.shopping_cart),
+                  label: const Text('Add to Cart'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+A shopping product card displays:
+A headphone icon representing the product.
+Product name: Wireless Headphones.
+Price: ₹1,999.
+Star rating.
+Add to Cart button.
+Result
+The application successfully creates a shopping product screen using Card, Text, Icon, and Button widgets.
+PROGRAM 24: Design a Student Dashboard
+Question
+Create a Flutter application to design a simple student dashboard containing profile information and different menu cards.
+Aim
+To design a student dashboard using Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: DashboardApp(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class DashboardApp extends StatelessWidget {
+  const DashboardApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Student Dashboard')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            const CircleAvatar(
+              radius: 40,
+              child: Icon(Icons.person, size: 45),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Rahul Sharma',
+              style: TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text('BCA Student'),
+            const SizedBox(height: 20),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                children: [
+                  dashboardCard(Icons.book, 'Courses'),
+                  dashboardCard(Icons.assignment, 'Assignments'),
+                  dashboardCard(Icons.grade, 'Results'),
+                  dashboardCard(Icons.calendar_month, 'Attendance'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget dashboardCard(IconData icon, String title) {
+    return Card(
+      elevation: 3,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 45, color: Colors.blue),
+          const SizedBox(height: 10),
+          Text(title, style: const TextStyle(fontSize: 16)),
+        ],
+      ),
+    );
+  }
+}
+Output
+The dashboard displays:
+Student profile icon.
+Student name and course.
+Four menu cards: Courses, Assignments, Results, and Attendance.
+The cards appear in a two-column grid.
+Result
+The application successfully creates a student dashboard using GridView, Card, Icon, and Text widgets.
+PROGRAM 25: Design a Personal Profile/Home Screen
+Question
+Create a Flutter application to design a personal profile/home screen by combining Text, Image, Icon, Container, Row, Column, Card, and Button widgets.
+Aim
+To create a personal profile screen using multiple Flutter widgets.
+Code
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: PersonalProfileApp(),
+    debugShowCheckedModeBanner: false,
+  ));
+}
+
+class PersonalProfileApp extends StatelessWidget {
+  const PersonalProfileApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('My Profile')),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(25),
+              color: Colors.blue,
+              child: const Column(
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    child: Icon(Icons.person, size: 60),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    'Rahul Sharma',
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    'BCA Student',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            const Card(
+              margin: EdgeInsets.all(15),
+              child: ListTile(
+                leading: Icon(Icons.email),
+                title: Text('Email'),
+                subtitle: Text('rahul@example.com'),
+              ),
+            ),
+            const Card(
+              margin: EdgeInsets.all(15),
+              child: ListTile(
+                leading: Icon(Icons.phone),
+                title: Text('Phone'),
+                subtitle: Text('9876543210'),
+              ),
+            ),
+            const Card(
+              margin: EdgeInsets.all(15),
+              child: ListTile(
+                leading: Icon(Icons.school),
+                title: Text('Education'),
+                subtitle: Text('Bachelor of Computer Applications'),
+              ),
+            ),
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: const Icon(Icons.edit),
+              label: const Text('Edit Profile'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+The personal profile screen displays:
+A blue profile header.
+A circular profile icon.
+Student name and course.
+Email information.
+Phone information.
+Education information.
+An Edit Profile button.
+Result
+The application successfully creates a personal profile screen by combining Text, Icon, Container, Column, Card, and Button widgets.
+Important Notes for Your Practical Examination
+Run one program at a time. Each program contains its own main() function.
+Use lib/main.dart to write and execute the code.
+Replace sample details such as name, college, roll number, and contact information with your own details.
+Image programs: Programs 4 and 6 require an internet connection for their sample network image. Other profile and product programs use icons as simple visual placeholders.
+Button functionality: Programs 10, 13, 14, 15, 20, 21, and 23 mainly demonstrate the requested interfaces. Their button callbacks are placeholders unless additional functionality is implemented.
+Calculator: Program 21 creates the calculator layout but does not perform arithmetic calculations.
+Weather screen: Program 22 uses sample weather information, not live data.
+All 25 questions from your lab sheet are covered above with code, output descriptions, and results.
