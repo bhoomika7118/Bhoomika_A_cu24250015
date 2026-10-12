@@ -1,0 +1,485 @@
+Here are all 25 Dart programming lab programs with source code and sample output, based on your uploaded BCA303P Assignment 1 PDF. The programs follow the same question order as your lab sheet. BCA303P-AS01.pdf
+BCA303P – Dart Programming Basics
+Lab Sheet – 1
+Aim: To understand the fundamental concepts of Dart programming and implement basic Dart programs.
+1. Display Name, Course, College Name, and Semester
+Program:
+void main() {
+  print("Name: Rahul");
+  print("Course: BCA");
+  print("College: ABC College");
+  print("Semester: 3rd");
+}
+Output:
+Name: Rahul
+Course: BCA
+College: ABC College
+Semester: 3rd
+Note: Replace Rahul and ABC College with your actual details.
+2. Declare Variables of Different Data Types
+Program:
+void main() {
+  int age = 20;
+  double percentage = 85.5;
+  String name = "Rahul";
+  bool isStudent = true;
+
+  print("Age: $age");
+  print("Percentage: $percentage");
+  print("Name: $name");
+  print("Is Student: $isStudent");
+}
+Output:
+Age: 20
+Percentage: 85.5
+Name: Rahul
+Is Student: true
+3. Demonstrate var, final, and const
+Program:
+void main() {
+  var name = "Rahul";
+  final age = 20;
+  const pi = 3.14;
+
+  print("Name: $name");
+  print("Age: $age");
+  print("Pi: $pi");
+}
+Output:
+Name: Rahul
+Age: 20
+Pi: 3.14
+4. Perform Arithmetic Operations on Two Numbers
+Program:
+void main() {
+  int a = 20;
+  int b = 10;
+
+  print("Sum: ${a + b}");
+  print("Difference: ${a - b}");
+  print("Product: ${a * b}");
+  print("Quotient: ${a / b}");
+}
+Output:
+Sum: 30
+Difference: 10
+Product: 200
+Quotient: 2.0
+5. Calculate Area and Perimeter of a Rectangle
+Program:
+void main() {
+  double length = 10;
+  double breadth = 5;
+
+  double area = length * breadth;
+  double perimeter = 2 * (length + breadth);
+
+  print("Area of Rectangle: $area");
+  print("Perimeter of Rectangle: $perimeter");
+}
+Output:
+Area of Rectangle: 50.0
+Perimeter of Rectangle: 30.0
+6. Calculate the Area of a Circle
+Program:
+void main() {
+  double radius = 7;
+  double pi = 3.14159;
+
+  double area = pi * radius * radius;
+
+  print("Radius: $radius");
+  print("Area of Circle: $area");
+}
+Output:
+Radius: 7.0
+Area of Circle: 153.93791
+7. Convert Celsius to Fahrenheit
+Formula:
+Fahrenheit = (Celsius × 9/5) + 32
+Program:
+void main() {
+  double celsius = 25;
+
+  double fahrenheit = (celsius * 9 / 5) + 32;
+
+  print("Temperature in Celsius: $celsius");
+  print("Temperature in Fahrenheit: $fahrenheit");
+}
+Output:
+Temperature in Celsius: 25.0
+Temperature in Fahrenheit: 77.0
+8. Swap Two Variables
+Program:
+void main() {
+  int a = 10;
+  int b = 20;
+
+  print("Before Swapping:");
+  print("a = $a");
+  print("b = $b");
+
+  int temp = a;
+  a = b;
+  b = temp;
+
+  print("After Swapping:");
+  print("a = $a");
+  print("b = $b");
+}
+Output:
+Before Swapping:
+a = 10
+b = 20
+After Swapping:
+a = 20
+b = 10
+9. Check Whether a Number Is Positive, Negative, or Zero
+Program:
+void main() {
+  int number = -5;
+
+  if (number > 0) {
+    print("Positive Number");
+  } else if (number < 0) {
+    print("Negative Number");
+  } else {
+    print("Zero");
+  }
+}
+Output:
+Negative Number
+10. Check Whether a Number Is Even or Odd
+Program:
+void main() {
+  int number = 7;
+
+  if (number % 2 == 0) {
+    print("Even Number");
+  } else {
+    print("Odd Number");
+  }
+}
+Output:
+Odd Number
+11. Find the Largest of Two Numbers
+Program:
+void main() {
+  int a = 25;
+  int b = 40;
+
+  if (a > b) {
+    print("$a is the largest number");
+  } else if (b > a) {
+    print("$b is the largest number");
+  } else {
+    print("Both numbers are equal");
+  }
+}
+Output:
+40 is the largest number
+12. Find the Largest of Three Numbers
+Program:
+void main() {
+  int a = 15;
+  int b = 35;
+  int c = 25;
+
+  if (a >= b && a >= c) {
+    print("$a is the largest");
+  } else if (b >= a && b >= c) {
+    print("$b is the largest");
+  } else {
+    print("$c is the largest");
+  }
+}
+Output:
+35 is the largest
+13. Check Whether a Year Is a Leap Year
+Program:
+void main() {
+  int year = 2024;
+
+  if ((year % 400 == 0) ||
+      (year % 4 == 0 && year % 100 != 0)) {
+    print("$year is a Leap Year");
+  } else {
+    print("$year is not a Leap Year");
+  }
+}
+Output:
+2024 is a Leap Year
+14. Calculate Grades Based on Percentage
+Grading criteria used in this example:
+90% and above: Grade A
+80% to below 90%: Grade B
+70% to below 80%: Grade C
+60% to below 70%: Grade D
+Below 60%: Grade F
+These are example grading criteria; your college may use different rules.
+Program:
+void main() {
+  double percentage = 85;
+
+  if (percentage >= 90) {
+    print("Grade: A");
+  } else if (percentage >= 80) {
+    print("Grade: B");
+  } else if (percentage >= 70) {
+    print("Grade: C");
+  } else if (percentage >= 60) {
+    print("Grade: D");
+  } else {
+    print("Grade: F");
+  }
+}
+Output:
+Grade: B
+15. Print Numbers from 1 to 10 Using a For Loop
+Program:
+void main() {
+  for (int i = 1; i <= 10; i++) {
+    print(i);
+  }
+}
+Output:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+16. Print All Even Numbers Between 1 and 50
+Program:
+void main() {
+  for (int i = 2; i <= 50; i += 2) {
+    print(i);
+  }
+}
+Output:
+2
+4
+6
+8
+10
+12
+14
+16
+18
+20
+22
+24
+26
+28
+30
+32
+34
+36
+38
+40
+42
+44
+46
+48
+50
+17. Calculate the Sum of the First 10 Natural Numbers
+Program:
+void main() {
+  int sum = 0;
+
+  for (int i = 1; i <= 10; i++) {
+    sum += i;
+  }
+
+  print("Sum of first 10 natural numbers: $sum");
+}
+Output:
+Sum of first 10 natural numbers: 55
+18. Generate the Multiplication Table of a Number
+Program:
+void main() {
+  int number = 5;
+
+  for (int i = 1; i <= 10; i++) {
+    print("$number x $i = ${number * i}");
+  }
+}
+Output:
+5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25
+5 x 6 = 30
+5 x 7 = 35
+5 x 8 = 40
+5 x 9 = 45
+5 x 10 = 50
+19. Calculate the Factorial of a Number
+Program:
+void main() {
+  int number = 5;
+  int factorial = 1;
+
+  for (int i = 1; i <= number; i++) {
+    factorial *= i;
+  }
+
+  print("Factorial of $number is $factorial");
+}
+Output:
+Factorial of 5 is 120
+20. Reverse a Number Using a Loop
+Program:
+void main() {
+  int number = 1234;
+  int reverse = 0;
+
+  while (number > 0) {
+    int digit = number % 10;
+    reverse = reverse * 10 + digit;
+    number ~/= 10;
+  }
+
+  print("Reversed Number: $reverse");
+}
+Output:
+Reversed Number: 4321
+Explanation: The % operator extracts the last digit, while ~/ performs integer division to remove it.
+21. Write a Function That Accepts Two Numbers and Returns Their Sum
+Program:
+int add(int a, int b) {
+  return a + b;
+}
+
+void main() {
+  int result = add(10, 20);
+
+  print("Sum: $result");
+}
+Output:
+Sum: 30
+22. Check Whether a Number Is Prime
+Program:
+void main() {
+  int number = 7;
+  bool isPrime = number >= 2;
+
+  for (int i = 2; i * i <= number; i++) {
+    if (number % i == 0) {
+      isPrime = false;
+      break;
+    }
+  }
+
+  if (isPrime) {
+    print("$number is a Prime Number");
+  } else {
+    print("$number is not a Prime Number");
+  }
+}
+Output:
+7 is a Prime Number
+23. Create a List of Five Student Names and Display Each Name Using a Loop
+Program:
+void main() {
+  List<String> students = [
+    "Rahul",
+    "Aman",
+    "Priya",
+    "Neha",
+    "Rohit"
+  ];
+
+  for (String name in students) {
+    print(name);
+  }
+}
+Output:
+Rahul
+Aman
+Priya
+Neha
+Rohit
+24. Find the Largest and Smallest Numbers in a List
+Program:
+void main() {
+  List<int> numbers = [10, 5, 25, 2, 18];
+
+  int largest = numbers[0];
+  int smallest = numbers[0];
+
+  for (int number in numbers) {
+    if (number > largest) {
+      largest = number;
+    }
+
+    if (number < smallest) {
+      smallest = number;
+    }
+  }
+
+  print("Largest Number: $largest");
+  print("Smallest Number: $smallest");
+}
+Output:
+Largest Number: 25
+Smallest Number: 2
+25. Student Result Program in Dart
+Aim: To store a student's name and marks in three subjects, calculate total marks and percentage, and display the result as Pass or Fail.
+Program:
+void main() {
+  String name = "Rahul";
+
+  int subject1 = 75;
+  int subject2 = 80;
+  int subject3 = 65;
+
+  int total = subject1 + subject2 + subject3;
+  double percentage = total / 3;
+
+  print("Student Name: $name");
+  print("Subject 1 Marks: $subject1");
+  print("Subject 2 Marks: $subject2");
+  print("Subject 3 Marks: $subject3");
+  print("Total Marks: $total");
+  print("Percentage: ${percentage.toStringAsFixed(2)}%");
+
+  if (subject1 >= 33 &&
+      subject2 >= 33 &&
+      subject3 >= 33) {
+    print("Result: Pass");
+  } else {
+    print("Result: Fail");
+  }
+}
+Output:
+Student Name: Rahul
+Subject 1 Marks: 75
+Subject 2 Marks: 80
+Subject 3 Marks: 65
+Total Marks: 220
+Percentage: 73.33%
+Result: Pass
+Explanation:
+The program stores the student's name and marks in three subjects.
+It calculates total marks by adding the three subject marks.
+It calculates the percentage by dividing the total by 3, assuming each subject is out of 100.
+The student passes if all three subject marks are at least 33; otherwise, the result is Fail. This is an example passing rule.
+How to Run Dart Programs
+You can run these programs using the DartPad online compiler without installing anything.
+Open DartPad⁠�.
+Copy one program at a time.
+Paste it into the editor.
+Click Run.
+View the output in the console.
+Important for your practical file:
+Write the question or aim first.
+Write the Dart program below it.
+Write the corresponding output.
+Replace sample student names, college details, and other values with your own details where needed.
+All 25 programs are covered in the same order as your uploaded lab sheet.
