@@ -1,0 +1,274 @@
+Q1. Create a Notes application using SQLite
+Code:
+await db.insert('notes', {
+  'title': 'Study',
+  'content': 'Learn Flutter'
+});
+
+final notes = await db.query('notes');
+
+Q2. Edit an existing note
+Code:await db.update(
+  'notes',
+  {'title': 'Updated Study', 'content': 'Flutter SQLite'},
+  where: 'id = ?',
+  whereArgs: [1],
+);OutputNote updated successfully.
+Updated Study
+Flutter SQLiteListView(
+  children: notes.map((n) => ListTile(
+    title: Text(n['title'].toString()),
+    subtitle: Text(n['content'].toString()),
+  )).toList(),
+);OutputStudy
+Learn Flutter
+Q3. Delete a note by swiping and display SnackBar
+Dismissible(
+  key: ValueKey(note['id']),
+  onDismissed: (_) async {
+    await db.delete(
+      'notes',
+      where: 'id = ?',
+      whereArgs: [note['id']],
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Note deleted')),
+    );
+  },
+  child: ListTile(
+    title: Text(note['title'].toString()),
+  ),
+);OutputSwipe note → Deleted
+SnackBar: Note deleted
+Q4. Search notes by title
+Code:final result = await db.query(
+  'notes',
+  where: 'title LIKE ?',
+  whereArgs: ['%Study%'],
+);
+
+print(result);Search: Study
+Result: Study
+Q5. Create a Contact Book
+Code:await db.insert('contacts', {
+  'name': 'Aman',
+  'phone': '9876543210',
+});
+
+final contacts = await db.query('contacts');
+
+print(contacts) output ;Name: Aman
+Phone: 9876543210
+Q6. Delete a contact using AlertDialog
+Code:final confirm = await showDialog<bool>(
+  context: context,
+  builder: (context) => AlertDialog(
+    title: const Text('Delete contact?'),
+    actions: [
+      TextButton(
+        onPressed: () => Navigator.pop(context, false),
+        child: const Text('Cancel'),
+      ),
+      TextButton(
+        onPressed: () => Navigator.pop(context, true),
+        child: const Text('Delete'),
+      ),
+    ],
+  ),
+);
+
+if (confirm == true) {
+  await db.delete(
+    'contacts',
+    where: 'id = ?',
+    whereArgs: [1],
+  );
+}OutputDelete contact?
+[Cancel] [Delete]
+Contact deleted.
+Q7. Search contacts using LIKE
+Code:final result = await db.query(
+  'contacts',
+  where: 'name LIKE ?',
+  whereArgs: ['%Am%'],
+);
+
+print(result);OutputSearch: Am
+Aman - 9876543210
+Q8. Create an Expense Tracker
+Code:await db.insert('expenses', {
+  'title': 'Food',
+  'amount': 150.0,
+});
+
+final expenses = await db.query('expenses');
+print(expenses);OutputFood - ₹150.0
+Q9. Calculate total expenses using SUM
+Code:final result = await db.rawQuery(
+  'SELECT SUM(amount) AS total FROM expenses',
+);
+
+final total = result.first['total'] ?? 0;
+print('Total Expense: ₹$total');Food: ₹150
+Travel: ₹100
+Total Expense: ₹250
+Q10. Create a To-Do application with CheckboxCheckboxListTile(
+  title: const Text('Complete assignment'),
+  value: completed,
+  onChanged: (value) async {
+    setState(() => completed = value!);
+
+    await db.update(
+      'tasks',
+      {'done': completed ? 1 : 0},
+      where: 'id = ?',
+      whereArgs: [1],
+    );
+  },
+);Output☐ Complete assignment
+☑ Complete assignment 
+Q11. Registration application using SQLite
+await db.insert('users', {
+  'name': 'Riya',
+  'email': 'riya@example.com',
+  'password': passwordController.text,
+});
+
+print('Registration successful');OutputName: Riya
+Email: riya@example.com
+Registration successful
+Q12. Login application using SQLite
+Code:final result = await db.query(
+  'users',
+  where: 'email = ? AND password = ?',
+  whereArgs: [
+    emailController.text,
+    passwordController.text,
+  ],
+);
+
+if (result.isNotEmpty) {
+  print('Login successful');
+} else {
+  print('Invalid username or password');
+}OutputLogin successful
+Home Screen
+Q13. Validate form fields before inserting a record
+final formKey = GlobalKey<FormState>();
+
+Form(
+  key: formKey,
+  child: Column(
+    children: [
+      TextFormField(
+        validator: (v) =>
+            v == null || v.isEmpty ? 'Required' : null,
+      ),
+      TextFormField(
+        validator: (v) =>
+            v != null && v.contains('@')
+                ? null
+                : 'Invalid email',
+      ),
+      TextFormField(
+        validator: (v) =>
+            v != null && v.length >= 6
+                ? null
+                : 'Minimum 6 characters',
+      ),
+      ElevatedButton(
+        onPressed: () {
+          if (formKey.currentState!.validate()) {
+            print('Record inserted');
+          }
+        },
+        child: const Text('Submit'),
+    Q14. Student List and Add/Edit Student screens
+Code:
+Navigate to the student form:await db.insert('students', {
+  'name': 'Aman',
+  'course': 'BCA',
+});
+
+final students = await db.query('students');
+
+print(students);OutputStudent List
+1. Aman - BCA
+
+[Add Student]
+[Edit Student]  ),
+
+    ],
+  ),
+);OutputInvalid email → Error
+Short password → Error
+Valid details → Record inserted
+Q15. Product Inventory application
+Code:await db.insert('products', {
+  'name': 'Pen',
+  'quantity': 10,
+  'price': 12.0,
+});
+
+await db.update(
+  'products',
+  {'quantity': 15},
+  where: 'id = ?',
+  whereArgs: [1],
+);
+
+await db.delete(
+  'products',
+  where: 'id = ?',
+  whereArgs: [1],
+);OutputProduct: Pen
+Quantity: 10
+Price: ₹12
+
+Quantity updated to 15.
+Product deleted.
+Q16. Shopping Cart with total price
+Code:await db.insert('cart', {
+  'name': 'Book',
+  'qty': 2,
+  'price': 50.0,
+});
+
+final result = await db.rawQuery(
+  'SELECT SUM(qty * price) AS total FROM cart',
+);
+
+final total = result.first['total'] ?? 0;
+print('Total Price: ₹$total');OutputBook × 2 = ₹100
+Total Price: ₹100Q17. Student Management Application
+Code:// Add student
+await db.insert('students', {
+  'name': 'Rahul',
+  'course': 'BCA',
+});
+
+// Update student
+await db.update(
+  'students',
+  {'name': 'Rahul Kumar'},
+  where: 'id = ?',
+  whereArgs: [1],
+);
+
+// Delete student
+await db.delete(
+  'students',
+  where: 'id = ?',
+  whereArgs: [1],
+);Student Management
+
+1. Home Screen
+2. Add Student
+3. Student List
+4. Update Student
+5. Delete Student
+
+Student added successfully.
+Student updated successfully.
+Student deleted successfully.
