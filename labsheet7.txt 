@@ -1,0 +1,308 @@
+Lab Sheet 7 — Solutions with Output
+Common setup
+Add these dependencies to pubspec.yaml:
+Q1. Create an SQLite database
+Aim: To create an SQLite database.
+final dbPath = join(await getDatabasesPath(), 'college.db');
+
+final db = await openDatabase(
+  dbPath,
+  version: 1,
+  onCreate: (db, version) async {},
+);
+
+print('Database created successfully');OutputDatabase created successfully
+Q2. Create a students table
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+  version: 1,
+  onCreate: (db, version) async {
+    await db.execute('''
+      CREATE TABLE students(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        roll TEXT,
+        course TEXT
+      )
+    ''');
+  },
+);
+
+print('Students table created');
+Output:Students table created
+Q3. Insert a student using insert()
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+await db.insert('students', {
+  'name': 'Aman',
+  'roll': '101',
+  'course': 'BCA',
+});
+
+print('Student inserted');
+OutputStudent inserted
+Q4. Insert student data using TextField
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+await db.insert('students', {
+  'name': nameController.text,
+  'roll': rollController.text,
+  'course': courseController.text,
+});
+
+print('Record saved');
+OutputEnter: Aman, 101, BCA
+Record saved
+Q5. Insert a student using rawInsert()
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+await db.rawInsert(
+  'INSERT INTO students(name, roll, course) VALUES(?, ?, ?)',
+  ['Riya', '102', 'BCA'],
+);
+
+print('Record inserted using rawInsert');OutputRecord inserted using rawInsert
+Q6. Display all students using query() and ListView
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+final students = await db.query('students');
+
+ListView(
+  children: students.map((s) {
+    return ListTile(
+      title: Text(s['name'].toString()),
+      subtitle: Text(
+        '${s['roll']} - ${s['course']}',
+      ),
+    );
+  }).toList(),
+);
+Output Aman
+101 - BCA
+
+Riya
+102 - BCA
+Q7. Display records using rawQuery()final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+final students = await db.rawQuery(
+  'SELECT * FROM students',
+);
+
+print(students);Output (example):[{id: 1, name: Aman, roll: 101, course: BCA},
+ {id: 2, name: Riya, roll: 102, course: BCA}]
+Q8. Update a student using update()
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+await db.update(
+  'students',
+  {'course': 'MCA'},
+  where: 'roll = ?',
+  whereArgs: ['101'],
+);
+
+print('Student updated');OutputStudent updated
+Q9. Delete one student using delete()final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+await db.delete(
+  'students',
+  where: 'roll = ?',
+  whereArgs: ['101'],
+);
+
+print('Student deleted');OutputStudent deleted
+Q10. Delete all students using Clear All
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+await db.delete('students');
+
+print('All records cleared');
+Output All records cleared
+Q11. Search student by roll number
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+final result = await db.query(
+  'students',
+  where: 'roll = ?',
+  whereArgs: ['102'],
+);
+
+print(result);All records cleared[{id: 2, name: Riya, roll: 102, course: BCA}]
+Q11. Search student by roll number
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+final result = await db.query(
+  'students',
+  where: 'roll = ?',
+  whereArgs: ['102'],
+);
+
+print(result);Output[{id: 2, name: Riya, roll: 102, course: BCA}]
+Q12. Display students by selected courseString course = 'BCA';
+
+final db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+final students = await db.query(
+  'students',
+  where: 'course = ?',
+  whereArgs: [course],
+);
+
+print(students);OutputSelected Course: BCA
+Aman - 101
+Riya - 102
+Q13. Sort students by namefinal db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+final students = await db.query(
+  'students',
+  orderBy: 'name ASC',
+);
+
+print(students);OutputAman
+Riya
+Q14. Count total student recordsfinal db = await openDatabase(
+  join(await getDatabasesPath(), 'college.db'),
+);
+
+final result = await db.rawQuery(
+  'SELECT COUNT(*) AS total FROM students',
+);
+
+final count = Sqflite.firstIntValue(result) ?? 0;
+
+print('Total students: $count');OutputTotal students: 2
+Q15. Create a Student model classclass Student {
+  final int? id;
+  final String name;
+  final String roll;
+  final String course;
+
+  Student({
+    this.id,
+    required this.name,
+    required this.roll,
+    required this.course,
+  });
+
+  Map<String, dynamic> toMap() => {
+    'id': id,
+    'name': name,
+    'roll': roll,
+    'course': course,
+  };
+
+  factory Student.fromMap(Map<String, dynamic> map) {
+    return Student(
+      id: map['id'],
+      name: map['name'],
+      roll: map['roll'],
+      course: map['course'],
+    );
+  }
+}Example use:final student = Student(
+  name: 'Aman',
+  roll: '101',
+  course: 'BCA',
+);
+
+await db.insert('students', student.toMap());
+print('Student model inserted');
+Q16. Create a DatabaseHelper classclass DatabaseHelper {
+  Future<Database> get database async {
+    return openDatabase(
+      join(await getDatabasesPath(), 'college.db'),
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute(
+          'CREATE TABLE students('
+          'id INTEGER PRIMARY KEY AUTOINCREMENT,'
+          'name TEXT, roll TEXT, course TEXT)',
+        );
+      },
+    );
+  }
+
+  Future<int> insert(Map<String, dynamic> data) async {
+    final db = await database;
+    return db.insert('students', data);
+  }
+
+  Future<List<Map<String, dynamic>>> read() async {
+    final db = await database;
+    return db.query('students');
+  }
+
+  Future<int> update(int id, Map<String, dynamic> data) async {
+    final db = await database;
+    return db.update(
+      'students', data,
+      where: 'id = ?', whereArgs: [id],
+    );
+  }
+
+  Future<int> delete(int id) async {
+    final db = await database;
+    return db.delete(
+      'students',
+      where: 'id = ?', whereArgs: [id],
+    );
+  }
+}OutputDatabaseHelper supports:
+Insert
+Read
+Update
+Delete
+Q17. Student Record Management Application
+Aim: To add, view, update, and delete student records using SQLite.
+The following are the core operations. They assume that the DatabaseHelper from Question 16 is available.final helper = DatabaseHelper();
+
+// Add student
+await helper.insert({
+  'name': 'Aman',
+  'roll': '101',
+  'course': 'BCA',
+});
+
+// View students
+final students = await helper.read();
+print(students);
+
+// Update student
+await helper.update(1, {
+  'name': 'Aman Kumar',
+  'roll': '101',
+  'course': 'MCA',
+});
+
+// Delete student
+await helper.delete(1);
+
+print('Operation completed');OutputStudent added
+Student records displayed
+Student updated
+Student deleted
+Operation completed
+
