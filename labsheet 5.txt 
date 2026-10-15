@@ -1,0 +1,1471 @@
+LAB SHEET – 5
+Flutter Lists, Grids and Dynamic User Interface
+Common setup
+Create a Flutter project:
+flutter create lab5
+cd lab5
+flutter run
+For each program, replace the contents of lib/main.dart with the corresponding code.
+1. Display a list of five items using ListView
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Five Items'),
+        ),
+        body: ListView(
+          children: const [
+            ListTile(title: Text('Apple')),
+            ListTile(title: Text('Banana')),
+            ListTile(title: Text('Mango')),
+            ListTile(title: Text('Orange')),
+            ListTile(title: Text('Grapes')),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+Five Items
+----------------
+Apple
+Banana
+Mango
+Orange
+Grapes
+The screen displays five items in a vertically scrollable list.
+2. List with leading icon, title and subtitle using ListTile
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Student List'),
+        ),
+        body: ListView(
+          children: const [
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Rahul'),
+              subtitle: Text('BCA Student'),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Priya'),
+              subtitle: Text('BCA Student'),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Amit'),
+              subtitle: Text('BCA Student'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+Student List
+-------------------------
+👤 Rahul
+   BCA Student
+
+👤 Priya
+   BCA Student
+
+👤 Amit
+   BCA Student
+Each ListTile contains a leading icon, title and subtitle. This corresponds to program 2 in the sheet. BCA303P-AS05.pdf
+3. Display numbers 1 to 100 using ListView.builder
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Numbers 1 to 100'),
+        ),
+        body: ListView.builder(
+          itemCount: 100,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: CircleAvatar(
+                child: Text('${index + 1}'),
+              ),
+              title: Text('Number ${index + 1}'),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+Output
+Numbers 1 to 100
+---------------------
+1   Number 1
+2   Number 2
+3   Number 3
+...
+98  Number 98
+99  Number 99
+100 Number 100
+The list is generated dynamically rather than writing 100 widgets manually.
+4. Display names stored in a Dart List
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  final List<String> names = const [
+    'Rahul',
+    'Priya',
+    'Amit',
+    'Neha',
+    'Rohit',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Names'),
+        ),
+        body: ListView.builder(
+          itemCount: names.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              leading: const Icon(Icons.person),
+              title: Text(names[index]),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+Output
+Names
+----------------
+👤 Rahul
+👤 Priya
+👤 Amit
+👤 Neha
+👤 Rohit
+The names are stored in a Dart List and displayed with ListView.builder. BCA303P-AS05.pdf
+5. List items separated by dividers using ListView.separated
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  final List<String> items = const [
+    'Home',
+    'Profile',
+    'Settings',
+    'About',
+    'Contact',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Separated List'),
+        ),
+        body: ListView.separated(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(items[index]),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const Divider();
+          },
+        ),
+      ),
+    );
+  }
+}
+Output
+Separated List
+----------------
+Home
+----------------
+Profile
+----------------
+Settings
+----------------
+About
+----------------
+Contact
+ListView.separated automatically places a divider between the list items. BCA303P-AS05.pdf
+6. Horizontally scrolling list using scrollDirection
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  final List<String> items = const [
+    'Apple',
+    'Banana',
+    'Mango',
+    'Orange',
+    'Grapes',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Horizontal List'),
+        ),
+        body: SizedBox(
+          height: 120,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return Container(
+                width: 120,
+                margin: const EdgeInsets.all(10),
+                color: Colors.blue,
+                alignment: Alignment.center,
+                child: Text(
+                  items[index],
+                  style: const TextStyle(color: Colors.white),
+                ),
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+Output
+Horizontal List
+
+[ Apple ] [ Banana ] [ Mango ] [ Orange ] [ Grapes ]
+    → scroll horizontally →
+The important property is:
+scrollDirection: Axis.horizontal
+This is the sixth exercise in the sheet. BCA303P-AS05.pdf
+7. Grid of icons using GridView.count
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final icons = [
+      Icons.home,
+      Icons.person,
+      Icons.settings,
+      Icons.email,
+      Icons.phone,
+      Icons.camera,
+      Icons.music_note,
+      Icons.favorite,
+    ];
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Icon Grid'),
+        ),
+        body: GridView.count(
+          crossAxisCount: 2,
+          padding: const EdgeInsets.all(10),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          children: icons.map((icon) {
+            return Card(
+              child: Icon(
+                icon,
+                size: 50,
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
+  }
+}
+Output
+Icon Grid
+
++-------------+-------------+
+|     🏠      |      👤     |
++-------------+-------------+
+|     ⚙       |      ✉      |
++-------------+-------------+
+|     ☎       |      📷     |
++-------------+-------------+
+|     ♪       |      ♥      |
++-------------+-------------+
+GridView.count is used to create the grid layout
+8. Grid of colored boxes using GridView.builder
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  final List<Color> colors = const [
+    Colors.red,
+    Colors.green,
+    Colors.blue,
+    Colors.orange,
+    Colors.purple,
+    Colors.teal,
+    Colors.pink,
+    Colors.yellow,
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Colored Grid'),
+        ),
+        body: GridView.builder(
+          padding: const EdgeInsets.all(10),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
+          ),
+          itemCount: colors.length,
+          itemBuilder: (context, index) {
+            return Container(
+              color: colors[index],
+              child: Center(
+                child: Text(
+                  'Box ${index + 1}',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+Output
+Colored Grid
+
++-------------+-------------+
+|   Box 1     |   Box 2     |
+|    RED      |   GREEN     |
++-------------+-------------+
+|   Box 3     |   Box 4     |
+|    BLUE     |   ORANGE    |
++-------------+-------------+
+|   Box 5     |   Box 6     |
+|   PURPLE    |    TEAL     |
++-------------+-------------+
+|   Box 7     |   Box 8     |
+|    PINK     |   YELLOW    |
++-------------+-------------+
+The lab specifically asks for GridView.builder for this exercise. BCA303P-AS05.pdf
+9. Product list using a Dart model class and ListView.builder
+Program
+import 'package:flutter/material.dart';
+
+class Product {
+  final String name;
+  final double price;
+
+  Product(this.name, this.price);
+}
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  final List<Product> products = const [
+    Product('Laptop', 55000),
+    Product('Mobile Phone', 25000),
+    Product('Headphones', 1500),
+    Product('Keyboard', 1200),
+    Product('Mouse', 700),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Products'),
+        ),
+        body: ListView.builder(
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            final product = products[index];
+
+            return ListTile(
+              leading: const Icon(Icons.shopping_cart),
+              title: Text(product.name),
+              trailing: Text(
+                '₹${product.price.toStringAsFixed(0)}',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+Output
+Products
+--------------------------------
+🛒 Laptop                  ₹55000
+🛒 Mobile Phone            ₹25000
+🛒 Headphones               ₹1500
+🛒 Keyboard                 ₹1200
+🛒 Mouse                     ₹700
+Here Product is the model class containing name and price. The lab sheet specifies this model-class approach. BCA303P-AS05.pdf
+10. Difference between StatelessWidget and StatefulWidget
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const DemoPage(),
+    );
+  }
+}
+
+class DemoPage extends StatefulWidget {
+  const DemoPage({super.key});
+
+  @override
+  State<DemoPage> createState() => _DemoPageState();
+}
+
+class _DemoPageState extends State<DemoPage> {
+  int count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Stateless vs Stateful'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'This Text is Stateless',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              'Counter: $count',
+              style: const TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  count++;
+                });
+              },
+              child: const Text('Change State'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+Initially:
+Stateless vs Stateful
+
+This Text is Stateless
+
+Counter: 0
+
+[ Change State ]
+After pressing the button:
+Counter: 1
+Press again:
+Counter: 2
+The MyApp widget is stateless, while DemoPage maintains changing state. This is the distinction requested in program 10. BCA303P-AS05.pdf
+11. Counter using setState()
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const CounterPage(),
+    );
+  }
+}
+
+class CounterPage extends StatefulWidget {
+  const CounterPage({super.key});
+
+  @override
+  State<CounterPage> createState() => _CounterPageState();
+}
+
+class _CounterPageState extends State<CounterPage> {
+  int counter = 0;
+
+  void increment() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Counter'),
+      ),
+      body: Center(
+        child: Text(
+          '$counter',
+          style: const TextStyle(fontSize: 50),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: increment,
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+Output
+Initial:
+Counter
+
+        0
+
+                  (+)
+After pressing +:
+        1
+Then:
+        2
+The counter increases through setState().
+12. Increment, Decrement and Reset counter
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const CounterPage(),
+    );
+  }
+}
+
+class CounterPage extends StatefulWidget {
+  const CounterPage({super.key});
+
+  @override
+  State<CounterPage> createState() => _CounterPageState();
+}
+
+class _CounterPageState extends State<CounterPage> {
+  int counter = 0;
+
+  void increment() {
+    setState(() {
+      counter++;
+    });
+  }
+
+  void decrement() {
+    setState(() {
+      counter--;
+    });
+  }
+
+  void reset() {
+    setState(() {
+      counter = 0;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Counter Controls'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '$counter',
+              style: const TextStyle(fontSize: 50),
+            ),
+            const SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: decrement,
+                  child: const Text('Decrement'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: reset,
+                  child: const Text('Reset'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: increment,
+                  child: const Text('Increment'),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Output
+Counter Controls
+
+             0
+
+[Decrement] [Reset] [Increment]
+For example, pressing Increment three times:
+3
+Pressing Decrement once:
+2
+Pressing Reset:
+0
+This implements all three counter operations requested in the lab sheet. BCA303P-AS05.pdf
+13. Add a new item using TextField and button
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const AddItemPage(),
+    );
+  }
+}
+
+class AddItemPage extends StatefulWidget {
+  const AddItemPage({super.key});
+
+  @override
+  State<AddItemPage> createState() => _AddItemPageState();
+}
+
+class _AddItemPageState extends State<AddItemPage> {
+  final TextEditingController controller = TextEditingController();
+
+  final List<String> items = [
+    'Apple',
+    'Banana',
+  ];
+
+  void addItem() {
+    if (controller.text.trim().isNotEmpty) {
+      setState(() {
+        items.add(controller.text.trim());
+        controller.clear();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Add Item'),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: controller,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter item',
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: addItem,
+                  child: const Text('Add'),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: items.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(items[index]),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+Output
+Initially:
+Add Item
+
+[ Enter item              ] [Add]
+
+Apple
+Banana
+Enter Mango and press Add:
+Apple
+Banana
+Mango
+The list is updated dynamically using setState(). BCA303P-AS05.pdf
+14. Delete item using delete icon
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const DeletePage(),
+    );
+  }
+}
+
+class DeletePage extends StatefulWidget {
+  const DeletePage({super.key});
+
+  @override
+  State<DeletePage> createState() => _DeletePageState();
+}
+
+class _DeletePageState extends State<DeletePage> {
+  final List<String> items = [
+    'Apple',
+    'Banana',
+    'Mango',
+    'Orange',
+  ];
+
+  void deleteItem(int index) {
+    setState(() {
+      items.removeAt(index);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Delete Item'),
+      ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(items[index]),
+            trailing: IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () => deleteItem(index),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+Output
+Initially:
+Delete Item
+
+Apple                    🗑
+Banana                   🗑
+Mango                    🗑
+Orange                   🗑
+Tap the delete icon beside Mango:
+Apple                    🗑
+Banana                   🗑
+Orange                   🗑
+This implements deletion through the delete icon as required. BCA303P-AS05.pdf
+15. Remove items by swiping using Dismissible
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const SwipeDeletePage(),
+    );
+  }
+}
+
+class SwipeDeletePage extends StatefulWidget {
+  const SwipeDeletePage({super.key});
+
+  @override
+  State<SwipeDeletePage> createState() => _SwipeDeletePageState();
+}
+
+class _SwipeDeletePageState extends State<SwipeDeletePage> {
+  final List<String> items = [
+    'Apple',
+    'Banana',
+    'Mango',
+    'Orange',
+    'Grapes',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Swipe to Delete'),
+      ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return Dismissible(
+            key: Key(items[index]),
+            direction: DismissDirection.horizontal,
+            onDismissed: (direction) {
+              final removedItem = items[index];
+
+              setState(() {
+                items.removeAt(index);
+              });
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('$removedItem deleted'),
+                ),
+              );
+            },
+            background: Container(
+              color: Colors.red,
+              alignment: Alignment.centerLeft,
+              padding: const EdgeInsets.only(left: 20),
+              child: const Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
+            ),
+            child: ListTile(
+              title: Text(items[index]),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+Output
+Before swiping:
+Swipe to Delete
+
+Apple
+Banana
+Mango
+Orange
+Grapes
+Swipe Banana left or right:
+Apple
+Mango
+Orange
+Grapes
+A message appears:
+Banana deleted
+This uses Flutter's Dismissible widget as specified in the lab sheet. BCA303P-AS05.pdf
+16. Filter names using a search TextField
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const SearchPage(),
+    );
+  }
+}
+
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
+
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  final List<String> allNames = [
+    'Rahul',
+    'Rohit',
+    'Priya',
+    'Pooja',
+    'Amit',
+    'Anjali',
+    'Neha',
+  ];
+
+  String searchText = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final filteredNames = allNames
+        .where(
+          (name) =>
+              name.toLowerCase().contains(searchText.toLowerCase()),
+        )
+        .toList();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search Names'),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  searchText = value;
+                });
+              },
+              decoration: const InputDecoration(
+                hintText: 'Search name',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: filteredNames.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: const Icon(Icons.person),
+                  title: Text(filteredNames[index]),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+Output
+Initially:
+Search Names
+
+[ 🔍 Search name ]
+
+Rahul
+Rohit
+Priya
+Pooja
+Amit
+Anjali
+Neha
+If the user types:
+ro
+The list becomes:
+Rohit
+If the user types:
+a
+The matching names are displayed.
+This implements the search/filter requirement from program 16. BCA303P-AS05.pdf
+17. Student Record List Application
+This is the complete application requested in the final exercise. It allows the user to:
+Add a student
+Enter name
+Enter roll number
+Enter course
+Display all students
+Search by name
+Delete a student
+These are the exact functional requirements specified in the lab sheet. BCA303P-AS05.pdf
+Program
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const StudentApp());
+}
+
+class Student {
+  final String name;
+  final String rollNumber;
+  final String course;
+
+  Student({
+    required this.name,
+    required this.rollNumber,
+    required this.course,
+  });
+}
+
+class StudentApp extends StatelessWidget {
+  const StudentApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Student Records',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const StudentPage(),
+    );
+  }
+}
+
+class StudentPage extends StatefulWidget {
+  const StudentPage({super.key});
+
+  @override
+  State<StudentPage> createState() => _StudentPageState();
+}
+
+class _StudentPageState extends State<StudentPage> {
+  final TextEditingController nameController =
+      TextEditingController();
+
+  final TextEditingController rollController =
+      TextEditingController();
+
+  final TextEditingController courseController =
+      TextEditingController();
+
+  final TextEditingController searchController =
+      TextEditingController();
+
+  final List<Student> students = [
+    Student(
+      name: 'Rahul',
+      rollNumber: '101',
+      course: 'BCA',
+    ),
+    Student(
+      name: 'Priya',
+      rollNumber: '102',
+      course: 'BCA',
+    ),
+  ];
+
+  String searchText = '';
+
+  void addStudent() {
+    final name = nameController.text.trim();
+    final roll = rollController.text.trim();
+    final course = courseController.text.trim();
+
+    if (name.isEmpty || roll.isEmpty || course.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please fill all fields'),
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      students.add(
+        Student(
+          name: name,
+          rollNumber: roll,
+          course: course,
+        ),
+      );
+    });
+
+    nameController.clear();
+    rollController.clear();
+    courseController.clear();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Student added successfully'),
+      ),
+    );
+  }
+
+  void deleteStudent(int index) {
+    setState(() {
+      students.removeAt(index);
+    });
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    rollController.dispose();
+    courseController.dispose();
+    searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final filteredStudents = students.where((student) {
+      return student.name
+          .toLowerCase()
+          .contains(searchText.toLowerCase());
+    }).toList();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Student Records'),
+      ),
+      body: Column(
+        children: [
+          // Add Student Form
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Student Name',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                TextField(
+                  controller: rollController,
+                  decoration: const InputDecoration(
+                    labelText: 'Roll Number',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                TextField(
+                  controller: courseController,
+                  decoration: const InputDecoration(
+                    labelText: 'Course',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+
+                const SizedBox(height: 10),
+
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton.icon(
+                    onPressed: addStudent,
+                    icon: const Icon(Icons.add),
+                    label: const Text('Add Student'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Search
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 12,
+            ),
+            child: TextField(
+              controller: searchController,
+              onChanged: (value) {
+                setState(() {
+                  searchText = value;
+                });
+              },
+              decoration: const InputDecoration(
+                labelText: 'Search by name',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
+          // Student List
+          Expanded(
+            child: filteredStudents.isEmpty
+                ? const Center(
+                    child: Text('No students found'),
+                  )
+                : ListView.builder(
+                    itemCount: filteredStudents.length,
+                    itemBuilder: (context, index) {
+                      final student = filteredStudents[index];
+
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 5,
+                        ),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            child: Text(
+                              student.rollNumber,
+                            ),
+                          ),
+                          title: Text(
+                            student.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle: Text(
+                            'Roll No: ${student.rollNumber}\n'
+                            'Course: ${student.course}',
+                          ),
+                          isThreeLine: true,
+                          trailing: IconButton(
+                            icon: const Icon(
+                              Icons.delete,
+                            ),
+                            onPressed: () {
+                              // Find the actual student in the
+                              // original list before deleting.
+                              final actualIndex =
+                                  students.indexOf(student);
+
+                              deleteStudent(actualIndex);
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+Output – Initial screen
+┌──────────────────────────────────┐
+│        Student Records            │
+├──────────────────────────────────┤
+│ Student Name                     │
+│ [____________________________]   │
+│                                  │
+│ Roll Number                      │
+│ [____________________________]   │
+│                                  │
+│ Course                           │
+│ [____________________________]   │
+│                                  │
+│       [+ Add Student]            │
+│                                  │
+│ 🔍 Search by name                │
+│ [____________________________]   │
+│                                  │
+│ 101   Rahul                 🗑    │
+│       Roll No: 101               │
+│       Course: BCA                │
+│                                  │
+│ 102   Priya                 🗑    │
+│       Roll No: 102               │
+│       Course: BCA                │
+└──────────────────────────────────┘
+Adding a student
+Enter:
+Student Name : Amit
+Roll Number  : 103
+Course       : BCA
+Press Add Student.
+The list becomes:
+Rahul
+Roll No: 101
+Course: BCA
+
+Priya
+Roll No: 102
+Course: BCA
+
+Amit
+Roll No: 103
+Course: BCA
+A snackbar appears:
+Student added successfully
+Searching
+If you type:
+Amit
+the list displays:
+Amit
+Roll No: 103
+Course: BCA
+Deleting
+Press the 🗑 icon beside Amit:
+Rahul
+Roll No: 101
+Course: BCA
+
+Priya
+Roll No: 102
+Course: BCA
