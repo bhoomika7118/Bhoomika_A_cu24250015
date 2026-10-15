@@ -1,0 +1,240 @@
+1. Student Name
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final c=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(
+ body:Column(children:[
+ TextField(controller:c),
+ ElevatedButton(onPressed:()=>showDialog(context:x,builder:(_)=>AlertDialog(content:Text(c.text))),child:Text("Show"))
+ ]));
+}
+Output: Enter name → press Show → name is displayed.2. Sum of Two Numbers
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final a=TextEditingController(),b=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:a),TextField(controller:b),
+ ElevatedButton(onPressed:()=>showDialog(context:x,builder:(_)=>AlertDialog(
+ content:Text("${double.parse(a.text)+double.parse(b.text)}"))),child:Text("Sum"))
+ ]));
+}
+Output: 10, 20 → 303. Calculator
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ final a=TextEditingController(),b=TextEditingController(); double r=0;
+ void f(String o){
+  var x=double.parse(a.text),y=double.parse(b.text);
+  setState(()=>r=o=="+"?x+y:o=="-"?x-y:o=="*"?x*y:x/y);
+ }
+ Widget build(BuildContext c)=>Scaffold(body:Column(children:[
+ TextField(controller:a),TextField(controller:b),
+ Row(children:["+","+","*","/"].map((o)=>ElevatedButton(
+ onPressed:()=>f(o),child:Text(o))).toList()),Text("$r")
+ ]));
+}
+Output: 10, 5 → + = 15, − = 5, × = 50, ÷ = 24. Change Text
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ String s="Hello";
+ Widget build(BuildContext c)=>Scaffold(body:Center(child:Column(
+ children:[Text(s),ElevatedButton(onPressed:()=>setState(()=>s="Welcome"),
+ child:Text("Click"))])));
+}
+Output: Hello → Welcome5. SnackBar
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ Widget build(BuildContext c)=>Scaffold(body:Center(child:ElevatedButton(
+ onPressed:()=>ScaffoldMessenger.of(c).showSnackBar(
+ SnackBar(content:Text("Hello!"))),child:Text("Click"))));
+}
+Output: SnackBar displays Hello!6. Submit & Reset
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ final c=TextEditingController(); String s="";
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:c),
+ Row(children:[
+ ElevatedButton(onPressed:()=>setState(()=>s=c.text),child:Text("Submit")),
+ ElevatedButton(onPressed:()=>setState(()=>{c.clear();s="";}),child:Text("Reset"))
+ ]),Text(s)
+ ]));
+}7. Student Total Marks
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final n=TextEditingController(),a=TextEditingController(),
+ b=TextEditingController(),c=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:n),TextField(controller:a),TextField(controller:b),TextField(controller:c),
+ ElevatedButton(onPressed:()=>showDialog(context:x,builder:(_)=>AlertDialog(
+ content:Text("${n.text}: ${double.parse(a.text)+double.parse(b.text)+double.parse(c.text)}"))),
+ child:Text("Total"))
+ ]));
+}
+Output: Rahul, 80, 70, 90 → Rahul: 2408. Percentage
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final a=TextEditingController(),b=TextEditingController(),c=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:a),TextField(controller:b),TextField(controller:c),
+ ElevatedButton(onPressed:()=>showDialog(context:x,builder:(_)=>AlertDialog(
+ content:Text("${(double.parse(a.text)+double.parse(b.text)+double.parse(c.text))/3}%"))),
+ child:Text("Percentage"))
+ ]));
+}
+9. Even or Odd
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final c=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:c),
+ ElevatedButton(onPressed:()=>showDialog(context:x,builder:(_)=>AlertDialog(
+ content:Text(int.parse(c.text)%2==0?"Even":"Odd"))),child:Text("Check"))
+ ]));
+}
+Output: 8 → Even
+10. Positive, Negative or Zero
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final c=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:c),
+ ElevatedButton(onPressed:(){
+  var n=double.parse(c.text);
+  showDialog(context:x,builder:(_)=>AlertDialog(
+   content:Text(n>0?"Positive":n<0?"Negative":"Zero")));
+ },child:Text("Check"))
+ ]));
+}
+11. Celsius to Fahrenheit
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final c=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:c),
+ ElevatedButton(onPressed:()=>showDialog(context:x,builder:(_)=>AlertDialog(
+ content:Text("${double.parse(c.text)*9/5+32} F"))),child:Text("Convert"))
+ ]));
+}
+Output: 25°C → 77°F
+12. Rectangle Area
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final l=TextEditingController(),w=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:l),TextField(controller:w),
+ ElevatedButton(onPressed:()=>showDialog(context:x,builder:(_)=>AlertDialog(
+ content:Text("${double.parse(l.text)*double.parse(w.text)}"))),child:Text("Area"))
+ ]));
+}
+Output: 10 × 5 → 50
+13. BMI
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatelessWidget{
+ final h=TextEditingController(),w=TextEditingController();
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ TextField(controller:h),TextField(controller:w),
+ ElevatedButton(onPressed:()=>showDialog(context:x,builder:(_)=>AlertDialog(
+ content:Text("${double.parse(w.text)/(double.parse(h.text)*double.parse(h.text))}"))),
+ child:Text("BMI"))
+ ]));
+}
+Output: Height 1.75m, Weight 70kg → BMI ≈ 22.86
+14. Checkbox
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ bool b=false;
+ Widget build(BuildContext c)=>Scaffold(body:Column(children:[
+ Checkbox(value:b,onChanged:(v)=>setState(()=>b=v!)),
+ Text(b?"Accepted":"Not Accepted")
+ ]));
+}
+15. Gender Radio Button
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ String? g;
+ Widget build(BuildContext c)=>Scaffold(body:Column(children:[
+ Radio(value:"Male",groupValue:g,onChanged:(v)=>setState(()=>g=v)),
+ Radio(value:"Female",groupValue:g,onChanged:(v)=>setState(()=>g=v)),
+ Text("$g")
+ ]));
+}
+16. Course Radio Button
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ String? s;
+ Widget build(BuildContext c)=>Scaffold(body:Column(children:[
+ for(var x in ["BCA","B.Tech","MCA"])
+ RadioListTile(value:x,groupValue:s,onChanged:(v)=>setState(()=>s=v),title:Text(x)),
+ Text("$s")
+ ]));
+}
+17. Semester Dropdown
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ String? s;
+ Widget build(BuildContext c)=>Scaffold(body:DropdownButton(
+ value:s,hint:Text("Semester"),
+ items:["1","2","3","4","5","6"].map((x)=>DropdownMenuItem(value:x,child:Text(x))).toList(),
+ onChanged:(v)=>setState(()=>s=v)
+ ));
+}
+18. Department Dropdown
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ String? d;
+ Widget build(BuildContext c)=>Scaffold(body:DropdownButton(
+ value:d,hint:Text("Department"),
+ items:["CSE","ECE","ME","CE"].map((x)=>DropdownMenuItem(value:x,child:Text(x))).toList(),
+ onChanged:(v)=>setState(()=>d=v)
+ ));
+}19. Switch
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ bool b=false;
+ Widget build(BuildContext c)=>Scaffold(body:SwitchListTile(
+ value:b,onChanged:(v)=>setState(()=>b=v),title:Text(b?"ON":"OFF")));
+}
+20. Checkbox + Radio + Dropdown + Switch
+import 'package:flutter/material.dart';
+void main()=>runApp(MaterialApp(home:A()));
+class A extends StatefulWidget{State<A> createState()=>B();}
+class B extends State<A>{
+ bool c=false,s=false; String? r,d;
+ Widget build(BuildContext x)=>Scaffold(body:Column(children:[
+ Checkbox(value:c,onChanged:(v)=>setState(()=>c=v!)),
+ Radio(value:"Male",groupValue:r,onChanged:(v)=>setState(()=>r=v)),
+ Radio(value:"Female",groupValue:r,onChanged:(v)=>setState(()=>r=v)),
+ DropdownButton(value:d,hint:Text("Course"),
+ items:["BCA","B.Tech","MCA"].map((x)=>DropdownMenuItem(value:x,child:Text(x))).toList(),
+ onChanged:(v)=>setState(()=>d=v)),
+ Switch(value:s,onChanged:(v)=>setState(()=>s=v))
+ ]));
+}
